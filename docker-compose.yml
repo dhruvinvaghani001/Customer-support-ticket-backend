@@ -11,5 +11,3 @@ services:
       - POSTGRES_DB=db
       - POSTGRES_USER=dhruvin
       - POSTGRES_PASSWORD=dhruvindb
-    networks:
-      - backend_network
