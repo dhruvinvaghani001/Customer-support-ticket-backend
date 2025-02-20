@@ -1,14 +1,24 @@
-export interface Category {
+export interface User {
   id: string;
+  username: string;
+  email: string;
+  password: string;
+  role?: string;
+  role_id: number;
+  createdAt: string;
+}
+
+export interface Category {
+  id: number;
   name: string;
-  parentCategoryId?: string | null;
-  createdAt: Date;
+  parentCategoryId?: number | null;
+  createdAt?: Date;
 }
 
 export interface Product {
   id: string;
   name: string;
-  categoryId: string;
+  categoryId: number;
   description: string;
   createdAt: Date;
 }

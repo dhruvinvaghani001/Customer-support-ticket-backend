@@ -5,32 +5,32 @@ import { v4 as uuidv4 } from "uuid";
 
 const categories: Omit<Category, "createdAt">[] = [
   {
-    id: uuidv4(),
+    id: 1,
     name: "Home Appliances",
     parentCategoryId: null,
   },
   {
-    id: uuidv4(),
+    id: 2,
     name: "Washing Machines",
     parentCategoryId: null,
   },
   {
-    id: uuidv4(),
+    id: 3,
     name: "Air Conditioners",
     parentCategoryId: null,
   },
   {
-    id: uuidv4(),
+    id: 4,
     name: "Smart Homes Devices",
     parentCategoryId: null,
   },
   {
-    id: uuidv4(),
+    id: 5,
     name: "Networking & Wifi",
     parentCategoryId: null,
   },
   {
-    id: uuidv4(),
+    id: 6,
     name: "Refrigerators",
     parentCategoryId: null,
   },
@@ -155,10 +155,36 @@ const seedProduct = async () => {
   }
 };
 
+const seedUserRole = async () => {
+  const roles = [
+    "user",
+    "support_agent",
+    "technical_staff",
+    "manager",
+    "admin",
+  ];
+
+  try {
+    logger.info("🌱 Seeding user Roles ...");
+    for (const role of roles) {
+      await pool.query(
+        `INSERT INTO user_role (role_name)
+         VALUES ($1)
+         ON CONFLICT (role_name) DO NOTHING;`,
+        [role]
+      );
+    }
+    logger.info("🌱 user role sedded! ");
+  } catch (error) {
+    console.log("Product Seeding Failed:", error);
+  }
+};
+
 async function seedDatabase() {
   try {
-    await seedCategory();
-    await seedProduct();
+    // await seedCategory();
+    // await seedProduct();
+    // await seedUserRole();
     logger.info("🎉 Database seeding completed!");
   } catch (error) {
     console.error("❌ Error seeding database:", error);

@@ -1,11 +1,14 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import rateLimit from "express-rate-limit";
 import cookieParser from "cookie-parser";
 
 import { globalErrorHandler } from "./middlewares/globalErrorHandler";
-import rateLimit from "express-rate-limit";
 import { ApiError } from "./utils/ApiError";
+
+import { router as authRouter } from "./routes/auth.routes";
+import { router as userRouter } from "./routes/usermanagement.route";
 
 dotenv.config();
 
@@ -47,10 +50,13 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+// authentication module routes
+app.use("/api/v1/auth", authRouter);
 
+app.use(authRouter);
 
-
-
+// user-management module
+app.use("/api/v1/user", userRouter);
 
 app.use(globalErrorHandler);
 
