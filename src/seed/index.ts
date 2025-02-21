@@ -3,118 +3,100 @@ import logger from "../log/logger";
 import { Category, Product } from "../types/types";
 import { v4 as uuidv4 } from "uuid";
 
-const categories: Omit<Category, "createdAt">[] = [
+const categories: Omit<Category, "id" | "createdAt">[] = [
   {
-    id: 1,
     name: "Home Appliances",
     parentCategoryId: null,
   },
   {
-    id: 2,
     name: "Washing Machines",
     parentCategoryId: null,
   },
   {
-    id: 3,
     name: "Air Conditioners",
     parentCategoryId: null,
   },
   {
-    id: 4,
     name: "Smart Homes Devices",
     parentCategoryId: null,
   },
   {
-    id: 5,
     name: "Networking & Wifi",
     parentCategoryId: null,
   },
   {
-    id: 6,
     name: "Refrigerators",
     parentCategoryId: null,
   },
 ];
 
-const products: Omit<Product, "createdAt">[] = [
+const products: Omit<Product, "id" | "createdAt">[] = [
   {
-    id: uuidv4(),
     name: "Samsung Split AC 1.5 Ton",
-    categoryId: categories[2].id,
+    categoryId: 2,
     description:
       "Samsung energy-efficient split air conditioner with inverter technology.",
   },
   {
-    id: uuidv4(),
     name: "LG Dual Inverter AC 2 Ton",
-    categoryId: categories[2].id,
+    categoryId: 2,
     description:
       "LG's latest dual inverter technology AC for efficient cooling.",
   },
 
   {
-    id: uuidv4(),
     name: "Bosch Front Load Washing Machine",
-    categoryId: categories[1].id,
+    categoryId: 3,
     description:
       "Front-loading washing machine with advanced water-saving features.",
   },
   {
-    id: uuidv4(),
     name: "Samsung Top Load Washing Machine",
-    categoryId: categories[1].id,
+    categoryId: 3,
     description: "Samsung high-efficiency top-load washing machine.",
   },
 
   {
-    id: uuidv4(),
     name: "Whirlpool Double-Door Refrigerator",
-    categoryId: categories[5].id,
+    categoryId: 6,
     description: "Frost-free double-door refrigerator with fast cooling.",
   },
   {
-    id: uuidv4(),
     name: "LG Smart Inverter Refrigerator",
-    categoryId: categories[5].id,
+    categoryId: 6,
     description: "LG's smart inverter refrigerator for power efficiency.",
   },
 
   {
-    id: uuidv4(),
     name: "Amazon Echo Dot (4th Gen)",
-    categoryId: categories[3].id,
+    categoryId: 1,
     description: "Voice-controlled smart speaker with Alexa assistant.",
   },
   {
-    id: uuidv4(),
     name: "Google Nest Hub",
-    categoryId: categories[3].id,
+    categoryId: 1,
     description: "Smart display with Google Assistant for home automation.",
   },
 
   {
-    id: uuidv4(),
     name: "Ring Video Doorbell Pro",
-    categoryId: categories[3].id,
+    categoryId: 5,
     description: "Smart video doorbell with real-time monitoring.",
   },
   {
-    id: uuidv4(),
     name: "Arlo Pro 4 Security Camera",
-    categoryId: categories[3].id,
+    categoryId: 5,
     description: "Wireless security camera system for home surveillance.",
   },
 
   {
-    id: uuidv4(),
     name: "Netgear Nighthawk WiFi Router",
-    categoryId: categories[4].id,
+    categoryId: 4,
     description: "High-speed gaming and streaming router.",
   },
   {
-    id: uuidv4(),
     name: "TP-Link Mesh WiFi System",
-    categoryId: categories[4].id,
+    categoryId: 4,
     description: "Whole-home mesh WiFi system for seamless connectivity.",
   },
 ];
@@ -125,9 +107,9 @@ const seedCategory = async () => {
     await Promise.all(
       categories.map((category) =>
         pool.query(
-          `INSERT INTO categories (id, name, parentCategoryId) VALUES ($1, $2, $3) 
+          `INSERT INTO categories (name, parentCategoryId) VALUES ($1, $2) 
        ON CONFLICT (id) DO NOTHING`,
-          [category.id, category.name, category.parentCategoryId]
+          [category.name, category.parentCategoryId]
         )
       )
     );
@@ -143,9 +125,9 @@ const seedProduct = async () => {
     await Promise.all(
       products.map((product) =>
         pool.query(
-          `INSERT INTO products (id, name, categoryId, description) VALUES ($1, $2, $3, $4) 
+          `INSERT INTO products (name, categoryId, description) VALUES ($1, $2, $3)
        ON CONFLICT (id) DO NOTHING`,
-          [product.id, product.name, product.categoryId, product.description]
+          [product.name, product.categoryId, product.description]
         )
       )
     );

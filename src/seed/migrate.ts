@@ -21,7 +21,7 @@ const createProductTable = async () => {
   try {
     await pool.query(`
             CREATE TABLE IF NOT EXISTS products (
-                id UUID PRIMARY KEY,
+                id UUID DEFAULT gen_random_uuid() PRIMARY KEY ,
                 name VARCHAR(255) UNIQUE NOT NULL,
                 categoryId INTEGER REFERENCES categories(id) ON DELETE SET NULL,
                 description TEXT NULL,
