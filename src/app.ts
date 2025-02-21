@@ -10,6 +10,7 @@ import { ApiError } from "./utils/ApiError";
 import { router as authRouter } from "./routes/auth.routes";
 import { router as userRouter } from "./routes/usermanagement.route";
 import { router as categoryRouter } from "./routes/category.route";
+import { router as productRouter } from "./routes/product.route";
 
 dotenv.config();
 
@@ -61,6 +62,9 @@ app.use("/api/v1/user", userRouter);
 
 // category routes
 app.use("/api/v1/category", categoryRouter);
+
+// product routes
+app.use("/api/v1/products", productRouter);
 
 app.use(globalErrorHandler);
 

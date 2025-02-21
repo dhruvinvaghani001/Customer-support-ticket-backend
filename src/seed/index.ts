@@ -33,70 +33,70 @@ const categories: Omit<Category, "id" | "createdAt">[] = [
 const products: Omit<Product, "id" | "createdAt">[] = [
   {
     name: "Samsung Split AC 1.5 Ton",
-    categoryId: 2,
+    categoryId: 3,
     description:
       "Samsung energy-efficient split air conditioner with inverter technology.",
   },
   {
     name: "LG Dual Inverter AC 2 Ton",
-    categoryId: 2,
+    categoryId: 3,
     description:
       "LG's latest dual inverter technology AC for efficient cooling.",
   },
 
   {
     name: "Bosch Front Load Washing Machine",
-    categoryId: 3,
+    categoryId: 4,
     description:
       "Front-loading washing machine with advanced water-saving features.",
   },
   {
     name: "Samsung Top Load Washing Machine",
-    categoryId: 3,
+    categoryId: 4,
     description: "Samsung high-efficiency top-load washing machine.",
   },
 
   {
     name: "Whirlpool Double-Door Refrigerator",
-    categoryId: 6,
+    categoryId: 1,
     description: "Frost-free double-door refrigerator with fast cooling.",
   },
   {
     name: "LG Smart Inverter Refrigerator",
-    categoryId: 6,
+    categoryId: 1,
     description: "LG's smart inverter refrigerator for power efficiency.",
   },
 
   {
     name: "Amazon Echo Dot (4th Gen)",
-    categoryId: 1,
+    categoryId: 5,
     description: "Voice-controlled smart speaker with Alexa assistant.",
   },
   {
     name: "Google Nest Hub",
-    categoryId: 1,
+    categoryId: 5,
     description: "Smart display with Google Assistant for home automation.",
   },
 
   {
     name: "Ring Video Doorbell Pro",
-    categoryId: 5,
+    categoryId: 2,
     description: "Smart video doorbell with real-time monitoring.",
   },
   {
     name: "Arlo Pro 4 Security Camera",
-    categoryId: 5,
+    categoryId: 2,
     description: "Wireless security camera system for home surveillance.",
   },
 
   {
     name: "Netgear Nighthawk WiFi Router",
-    categoryId: 4,
+    categoryId: 6,
     description: "High-speed gaming and streaming router.",
   },
   {
     name: "TP-Link Mesh WiFi System",
-    categoryId: 4,
+    categoryId: 6,
     description: "Whole-home mesh WiFi system for seamless connectivity.",
   },
 ];

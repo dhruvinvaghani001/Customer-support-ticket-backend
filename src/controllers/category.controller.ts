@@ -11,6 +11,7 @@ import {
 } from "../models/category.model";
 import { ApiResponse } from "../utils/ApiResponse";
 import { ApiError } from "../utils/ApiError";
+import { Category } from "../types/types";
 
 const handleGetcategories = asyncHandler(
   async (req: AuthRequest, res: Response) => {
@@ -47,9 +48,15 @@ const handleCreateCategory = asyncHandler(
 
 const handleUpdateCategory = asyncHandler(
   async (req: AuthRequest, res: Response) => {
-    const { name, parentcategoryId } = req.body;
+    const { name, parentCategoryId } = req.body;
     const { id } = req.params;
-    const result = await updateCategory(Number(id), name, parentcategoryId);
+    console.log(name, parentCategoryId);
+    const updates: Partial<Category> = {};
+    if (name) updates.name = name;
+    if (parentCategoryId != "undefined") {
+      updates.parentCategoryId = parentCategoryId;
+    }
+    const result = await updateCategory(Number(id), updates);
     if (!result) {
       throw new ApiError(500, "Internal server Error!");
     }

@@ -45,24 +45,25 @@ const getCategoryById = async (
 
 const updateCategory = async (
   categoryId: number,
-  name: string,
-  parentCategoryId?: number | null
+  updates: Partial<Category>
 ): Promise<Category | null> => {
   const category = await getCategoryById(categoryId);
 
-  const newParent =
-    parentCategoryId !== undefined
-      ? parentCategoryId
-      : category?.parentCategoryId;
+  const fields = Object.keys(updates) as (keyof Category)[];
 
-  const updateQuery = `
-      UPDATE categories
-      SET name = $1, parentCategoryId = $2
-      WHERE id = $3
-      RETURNING *;
-    `;
+  const setClause = fields
+    .map((field, index) => `${field} = $${index + 2}`)
+    .join(", ");
 
-  const result = await pool.query(updateQuery, [name, newParent, categoryId]);
+  const query = `
+    UPDATE categories
+    SET ${setClause}
+    WHERE id = $1
+    RETURNING *;
+  `;
+  console.log(query);
+  const values = [categoryId, ...fields.map((field) => updates[field])];
+  const result = await pool.query(query, values);
   return result.rows[0];
 };
 

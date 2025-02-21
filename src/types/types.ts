@@ -19,6 +19,7 @@ export interface Product {
   id: string;
   name: string;
   categoryId: number;
+  category?: string;
   description: string;
   createdAt: Date;
 }

@@ -23,7 +23,7 @@ const createProductTable = async () => {
             CREATE TABLE IF NOT EXISTS products (
                 id UUID DEFAULT gen_random_uuid() PRIMARY KEY ,
                 name VARCHAR(255) UNIQUE NOT NULL,
-                categoryId INTEGER REFERENCES categories(id) ON DELETE SET NULL,
+                categoryId INTEGER REFERENCES categories(id) ON DELETE CASCADE,
                 description TEXT NULL,
                 createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
@@ -69,8 +69,8 @@ const createUserTable = async () => {
 const migrateDatabase = async () => {
   try {
     logger.info("🚀 Starting database migration...");
-    await createCategoryTable();
-    await createProductTable();
+    // await createCategoryTable();
+    // await createProductTable();
     // await createUserRoleTable();
     // await createUserTable();
     logger.info("🎉 Database migration completed!");
